@@ -1,0 +1,83 @@
+Name	Tax ID	Abundance Score	Relative Abundance	Unique Matches Frequency
+Cutibacterium acnes	1747	21182.23	25.685000000000002	120
+Propionibacterium sp. 5_U_42AFAA	450748	20101.99	24.375	94
+Kocuria marina	223184	6244.48	7.571999999999999	208113
+Micrococcus luteus	1270	3149.79	3.819	3619
+Corynebacterium pseudogenitalium	38303	2321.67	2.815	17062
+Enhydrobacter aerosaccus	225324	2309.67	2.801	22738
+Corynebacterium tuberculostearicum	38304	2229.21	2.703	13595
+Staphylococcus epidermidis	1282	1970.72	2.39	24
+Staphylococcus capitis	29388	1782.63	2.162	1007
+Paenibacillus sophorae	1333845	1343.29	1.629	16817
+Actinomyces oris	544580	1015.42	1.2309999999999999	13450
+Corynebacterium ihumii	1232427	963.14	1.168	18941
+Lactobacillus curvatus	28038	936.5	1.1360000000000001	3601
+Fenollaria massiliensis	938288	877.95	1.065	9053
+Prevotella_u_s	838	797.56	0.967	28
+Tissierellia bacterium S7-1-4	1284708	788.97	0.9570000000000001	9135
+Dialister_u_s	39948	678.46	0.823	10
+Prevotella sp. S7-1-8	1284775	631.49	0.766	15060
+Kytococcus sedentarius	1276	630.39	0.764	12236
+Actinomyces sp. oral taxon 175	712119	531.06	0.644	2686
+Kocuria rhizophila	72000	529.11	0.642	7659
+Actinomyces viscosus	1656	478.17	0.58	1783
+Staphylococcus sp. M0480	1388318	441.84	0.536	53
+Staphylococcus hominis	1290	386.14	0.468	135
+Staphylococcus aureus	1280	360.59	0.437	191
+Porphyromonas uenonis	281920	352.09	0.42700000000000005	5530
+Finegoldia magna	1260	349.28	0.424	3744
+Staphylococcus_u_s	1279	348.88	0.42300000000000004	635
+Streptococcus mitis	28037	340.76	0.413	1683
+Levyella massiliensis	938289	339.02	0.411	4953
+Peptoniphilus lacrimalis	33031	330.85	0.40099999999999997	578
+Anaerococcus prevotii	33034	326	0.395	3416
+Peptoniphilus sp. oral taxon 836	671216	281.21	0.34099999999999997	266
+Corynebacterium pyruviciproducens	598660	278.09	0.337	6046
+Kocuria_u_s	57493	268.48	0.326	98
+Prevotella timonensis	386414	264.36	0.321	4185
+Streptococcus thermophilus	1308	261.39	0.317	26
+Cutibacterium granulosum	33011	260.75	0.316	443
+Prevotella corporis	28128	257.01	0.312	5357
+Peptoniphilus grossensis	1465756	236.61	0.28700000000000003	2330
+Porphyromonas bennonis	501496	232.35	0.28200000000000003	3628
+Streptococcus_u_s	1301	201.98	0.245	624
+Facklamia hominis	178214	186.21	0.22599999999999998	920
+Bacteroides_u_s	816	185.76	0.22499999999999998	11
+Staphylococcus haemolyticus	1283	182.39	0.22100000000000003	143
+Anaerococcus senegalensis	1288120	174.52	0.212	1274
+Acinetobacter johnsonii	40214	173.84	0.211	758
+Prevotella veroralis	28137	172.22	0.209	1000
+Anaerococcus obesiensis	1287640	169.52	0.20600000000000002	891
+Rothia dentocariosa	2047	161.23	0.196	1134
+Streptococcus vestibularis	1343	155	0.188	371
+Ruminococcus_u_s	1263	153.01	0.186	9
+Prevotella nigrescens	28133	144.58	0.17500000000000002	996
+Clostridiales bacterium S5-A14a	1230734	141.19	0.17099999999999999	1756
+Anaerococcus vaginalis	33037	138.99	0.169	674
+Staphylococcus pettenkoferi	170573	138.17	0.168	3181
+Granulicatella_u_s	117563	137.82	0.167	12
+Staphylococcus equorum	246432	133.28	0.16199999999999998	466
+Streptococcus anginosus	1328	128.87	0.156	243
+Corynebacterium genitalium	38288	125.36	0.152	2968
+Varibaculum cambriense	184870	121.28	0.147	1946
+Staphylococcus lugdunensis	28035	116.38	0.14100000000000001	49
+Corynebacterium jeikeium	38289	109.47	0.133	22
+Gemella_u_s	1378	109.34	0.133	23
+Anaerococcus provencensis	938293	109.2	0.132	1549
+Campylobacter hominis	76517	105.03	0.127	1172
+Faecalibacterium prausnitzii	853	103.4	0.125	72
+Propionibacteriaceae_u_s	31957	98.29	0.11900000000000001	116
+Streptococcus agalactiae	1311	98.06	0.11900000000000001	36
+Streptococcus cristatus	45634	93.09	0.11299999999999999	124
+Acinetobacter ursingii	108980	91.71	0.11100000000000002	42
+Neisseriaceae_u_s	481	90.9	0.11	24
+Streptococcus pseudopneumoniae	257758	90.03	0.109	9
+Mobiluncus curtisii	2051	82.09	0.1	66
+Veillonella_u_s	29465	82.32	0.1	24
+Prevotella bivia	28125	82.3	0.1	8
+Prevotella oris	28135	81.38	0.099	493
+Anaerococcus hydrogenalis	33029	79.89	0.097	92
+Peptoniphilus senegalensis	1465757	79.5	0.096	746
+Corynebacterium glucuronolyticum	39791	78.11	0.095	870
+Corynebacterium durum	61592	77.4	0.094	2149
+Porphyromonas somerae	322095	75.71	0.092	1646

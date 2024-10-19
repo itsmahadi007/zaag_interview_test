@@ -1,0 +1,69 @@
+Name	Tax ID	Abundance Score	Relative Abundance	Unique Matches Frequency
+Micrococcus luteus	1270	15599.58	24.609	74435
+Propionibacterium sp. 5_U_42AFAA	450748	7188.05	11.339	61
+Enhydrobacter aerosaccus	225324	6712.51	10.589	118310
+Staphylococcus capitis	29388	5575.81	8.796	3683
+Corynebacterium genitalium	38288	3578.93	5.646	98616
+Paenibacillus sophorae	1333845	2646.75	4.175	40416
+Pseudonocardia sp. P2	882856	2455.45	3.8739999999999997	8257
+Kocuria rhizophila	72000	1975.12	3.116	31845
+Corynebacterium pseudogenitalium	38303	1743.61	2.751	17009
+Corynebacterium tuberculostearicum	38304	1675.12	2.643	13380
+Staphylococcus epidermidis	1282	1101.49	1.738	1322
+Corynebacterium ihumii	1232427	1059.58	1.672	31271
+Staphylococcus aureus	1280	945.19	1.4909999999999999	19
+Kocuria palustris	71999	616.06	0.972	5103
+Microbacterium sp. KROCY2	1305732	572.48	0.903	2954
+Staphylococcus hominis	1290	553.52	0.873	511
+Paracoccus yeei	147645	480.12	0.757	14254
+Staphylococcus_u_s	1279	409.67	0.6459999999999999	47
+Staphylococcus warneri	1292	407.73	0.643	7114
+Corynebacterium ureicelerivorans	401472	400.88	0.632	10198
+Cutibacterium granulosum	33011	347.45	0.5479999999999999	797
+Acinetobacter baumannii	470	340.41	0.5369999999999999	134
+Staphylococcus lugdunensis	28035	311.08	0.49100000000000005	2251
+Finegoldia magna	1260	299.9	0.473	56
+Cutibacterium acnes	1747	271.04	0.428	321
+Staphylococcus haemolyticus	1283	262.32	0.414	251
+Staphylococcus sp. MDS7B	1209359	259.85	0.41000000000000003	758
+Corynebacterium minutissimum	38301	244.18	0.385	7056
+Streptococcus_u_s	1301	241.78	0.381	80
+Acinetobacter sp. MDS7A	1209355	236.07	0.372	3915
+Corynebacterium pyruviciproducens	598660	212.63	0.335	6776
+[Propionibacterium] namnetense	1574624	210.99	0.333	5326
+Staphylococcus xylosus	1288	202.57	0.32	1639
+Escherichia coli	562	202.96	0.32	24
+Acinetobacter towneri	202956	198.88	0.314	15
+Bacteroides neonati	1347393	191.07	0.301	6923
+Bordetella pertussis	520	182.33	0.28800000000000003	423
+Staphylococcus caprae	29380	178.05	0.281	13140
+Turicella otitidis	29321	169.92	0.268	4472
+Corynebacterium sp. ATCC 6931	1487956	166.81	0.263	3680
+Rothia mucilaginosa	43675	159.43	0.252	1581
+Neisseria_u_s	482	156.7	0.247	113
+Staphylococcus pettenkoferi	170573	155.01	0.245	5227
+Corynebacterium jeikeium	38289	149.73	0.23600000000000002	1883
+Actinomyces timonensis	1288391	135.88	0.214	3907
+Lactobacillus_u_s	1578	132.3	0.209	22
+Acinetobacter_u_s	469	121.04	0.191	159
+Lactococcus lactis	1358	118.17	0.186	31
+Shewanella baltica	62322	117.79	0.186	176
+Pseudomonas luteola	47886	115.04	0.181	3044
+Neisseria mucosa	488	104.15	0.164	378
+Corynebacterium jeddahense	1414719	97.01	0.153	3856
+Prevotella_u_s	838	96.88	0.153	262
+Herbaspirillum_u_s	963	94.38	0.149	20
+Acinetobacter junii	40215	94.51	0.149	106
+Roseomonas_u_s	125216	94	0.148	2282
+Rothia_u_s	32207	91.86	0.145	1005
+Granulicatella_u_s	117563	91.83	0.145	13
+Actinomyces neuii	33007	91.44	0.14400000000000002	2762
+Propionibacteriaceae_u_s	31957	90.53	0.14300000000000002	122
+Veillonella_u_s	29465	86.68	0.13699999999999998	13
+Prevotella bivia	28125	84.87	0.134	793
+Anaerococcus prevotii	33034	84.1	0.133	1293
+Moraxella catarrhalis	480	83.93	0.132	327
+Xanthomonas campestris	339	81.31	0.128	526
+Haemophilus influenzae	727	79.6	0.126	28
+Streptococcus thermophilus	1308	76.94	0.121	43
+Streptococcus mitis	28037	76.56	0.121	13
