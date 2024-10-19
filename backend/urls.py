@@ -40,6 +40,7 @@ if DEBUG:
 
 urlpatterns += [
     path("api/", include("apps.users_management.urls")),
+    path("api/", include("apps.cosmos.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
