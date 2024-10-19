@@ -33,6 +33,7 @@ THIRD_PARTY_APPS = [
 MY_APPS = [
     "apps.users_management",
     "apps.notification_management",
+    "apps.cosmos"
 ]
 
 if DEBUG:

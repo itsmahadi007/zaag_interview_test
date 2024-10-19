@@ -24,7 +24,6 @@ class Command(BaseCommand):
             email_verified=True,
             first_name=first_name,
             last_name=last_name,
-            user_type=user_type,
         )
 
         EmailAddress.objects.create(
