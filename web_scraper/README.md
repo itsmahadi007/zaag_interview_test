@@ -36,7 +36,7 @@ pip install -r requirements.txt
 To run the scraper, execute:
 
 ```sh
-python scrap.py
+python main.py
 ```
 
 ## Notes

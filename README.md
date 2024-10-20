@@ -1,250 +1,158 @@
-# Django_e-comerce_with_payment_getway_and_rest_api
+## For the webscraper see web_scraper folder's README.MD
 
-
-### To run it in docker 
+# To run the django in docker 
 ```bash
  bash scripts/live_server_deploy.sh 
 ```
 
-### API Documentation (REST API)
+## API Documentation for Cosmos Application
 
-#### 1. **Login API**
-**URL:** `POST /api/login/`  
-**Description:** Authenticates user and generates a session.  
-**Request:**
-- Header: `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-- Form Data: 
-  - `username` (string) - User's username
-  - `password` (string) - User's password  
-
-**Curl Example:**
+### Check API doc of redoc and swagger
 ```bash
+http://127.0.0.1:8000/api_doc_v1/
+and 
+http://127.0.0.1:8000/api_doc_v2/
+
+```
+
+### Login Endpoint
+
+#### Endpoint
+`POST /api/login/`
+
+#### Request Example (cURL)
+```sh
 curl --location 'http://127.0.0.1:8000/api/login/' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
+--header 'Cookie: csrftoken=S8jQQrO1mh5p15aqHBb6L5O4Dn59eRyd; sessionid=4pzizh0de4wajbwk975w1wcdevx78j59' \
 --form 'username="admin"' \
 --form 'password="1516"'
 ```
 
-#### 2. **Create Thread API**
-**URL:** `POST /api/threads/`  
-**Description:** Creates a new thread.  
-**Request:**
-- Header: 
-  - `Authorization: Bearer <JWT token>`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-- Form Data:
-  - `user` (integer) - User ID of the thread creator  
 
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/threads/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
---form 'user="2"'
-```
+#### Parameters
+- `username` (required): The username of the user.
+- `password` (required): The password of the user.
 
-#### 3. **Register API**
-**URL:** `POST /api/register/`  
-**Description:** Registers a new user.  
-**Request:**
-- Header: 
-  - `Authorization: Bearer <JWT token>`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-- Form Data:
-  - `username` (string) - New user's username
-  - `email` (string) - New user's email
-  - `password1` (string) - User's password
-  - `password2` (string) - Password confirmation  
+#### Headers
+- `Cookie`: Required to send CSRF token and session information.
 
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/register/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
---form 'username="admin1"' \
---form 'email="itsmahadi@gmail.com"' \
---form 'password1="M@h@d\!@199610"' \
---form 'password2="M@h@d\!@199610"'
-```
+#### Response
+- `200 OK`: Login successful. Returns a session token for further requests.
+- `401 Unauthorized`: Invalid credentials provided.
 
-#### 4. **Request Email Verification API**
-**URL:** `POST /api/request_by_email_verification/`  
-**Description:** Requests an email verification for a specific action.  
-**Request:**
-- Header: `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-- Form Data:
-  - `email` (string) - User's email
-  - `using_for` (string) - Purpose (e.g., `password_reset`)
-
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/request_by_email_verification/' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
---form 'email="itsmahadi@gmail.com"' \
---form 'using_for="password_reset"'
-```
-
-#### 5. **Verify Email Token API**
-**URL:** `POST /api/verify_email_token/`  
-**Description:** Verifies the OTP sent to the user's email.  
-**Request:**
-- Header: `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-- Form Data:
-  - `otp` (string) - OTP sent to the user's email
-  - `email` (string) - User's email
-  - `using_for` (string) - Purpose (e.g., `password_reset`)
-  - `password` (string) - New password (for password reset)
-
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/verify_email_token/' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
---form 'otp="2285"' \
---form 'email="itsmahadi@gmail.com"' \
---form 'using_for="password_reset"' \
---form 'password="M@h@d\!@1996"'
-```
+#### Notes
+- This endpoint requires valid CSRF tokens and cookies to be sent along with the request.
 
 
-#### 6. **Get Products API**
-**URL:** `GET /api/products/`  
-**Description:** Retrieves a list of products.  
-**Request:**
-- Header: 
-  - `Authorization: Bearer <JWT token>`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
+## Cosmos API
 
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/products/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>'
-```
+### Cosmos Model ViewSet
 
-#### 7. **Order Shipping API**
-**URL:** `GET /api/order_shipping/`  
-**Description:** Retrieves order shipping information.  
-**Request:**
-- Header: 
-  - `Authorization: Bearer <JWT token>`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
+The Cosmos Model ViewSet provides CRUD operations on the `CosmosModel` along with filtering, searching, and pagination features.
 
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/order_shipping/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>'
-```
+#### Endpoint
+- `GET /api/cosmos/`
+- `POST /api/cosmos/`
+- `GET /api/cosmos/{id}/`
+- `PUT /api/cosmos/{id}/`
+- `PATCH /api/cosmos/{id}/`
+- `DELETE /api/cosmos/{id}/`
 
-#### 8. **Product Cart API (Add or Modify Cart Items)**
-**URL:** `POST /api/product_cart/`  
-**Description:** Adds a product to the cart.  
-**Request:**
-- Header: 
-  - `Authorization: Bearer <JWT token>`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
+#### Authentication
+- Authentication is required for all operations (`IsAuthenticated` permission class).
 
-**Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/product_cart/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>'
-```
+#### Parameters
 
-#### 9. **Product Cart Item API (Supports POST, PATCH, PUT, DELETE)**
-**URL:** `/api/product_cart/{id}/`  
-**Description:** Allows modification of a cart item. Supports creating, updating, or deleting a cart item.  
-**Request:**
-- Header: 
-  - `Authorization: Bearer <JWT token>`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-- Form Data (for POST/PUT/PATCH):
-  - `cart` (integer) - Cart ID
-  - `product` (integer) - Product ID
-  - `created_by` (integer) - User ID who created the cart
-  - `quantity` (integer) - Quantity of the product
+**Query Parameters** for Filtering:
+- `tax_id`: Filter by `tax_id`.
+- `id`: Filter by `id`.
+- `name`: Filter by `name` (case-insensitive).
+- `relative_abundance_range`: Filter by range of `relative_abundance`. The format is `min_value,max_value`.
+- `file_name`: Filter by `file_name` (case-insensitive).
 
-**Curl Example:**
-- **POST/PUT/PATCH:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/product_cart/11/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
---form 'cart="7"' \
---form 'product="5"' \
---form 'created_by="1"' \
---form 'quantity="7"'
-```
-- **DELETE:**
-```bash
-curl --location --request DELETE 'http://127.0.0.1:8000/api/product_cart/11/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>'
-```
+#### Pagination
+- The results are paginated using `CustomPagination`.
+- Default page size is `10`.
+- You can set the page size by using the query parameter `page_size`.
+- The current page can be accessed via the `current_page` field in the response.
 
-
-#### 10. **Aamar Pay Payment Request API**
-
-**URL:** `POST /api/aamar_pay_payment_request/`  
-**Description:** Initiates a payment request via Aamar Pay and returns a URL that the user can open in a browser to proceed with the payment.
-
-#### **Request:**
-- **Headers:**
-  - `Authorization: Bearer <JWT token>`
-  - `Content-Type: application/json`
-  - `Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>`
-  
-- **Body (JSON):**
-  - `cus_name` (string) - Customer's name
-  - `cus_email` (string) - Customer's email
-  - `cus_phone` (string) - Customer's phone number
-  - `currency` (string) - Currency code (e.g., `BDT` for Bangladeshi Taka)
-  - `success_url` (string) - URL to redirect after successful payment
-  - `fail_url` (string) - URL to redirect after failed payment
-  - `cancel_url` (string) - URL to redirect if payment is canceled
-  - `cus_add1` (string) - Customer's address line 1
-  - `cus_add2` (string) - Customer's address line 2
-  - `cus_city` (string) - Customer's city
-  - `cus_state` (string) - Customer's state
-  - `cus_postcode` (string) - Customer's postal code
-  - `cus_country` (string) - Customer's country
-  - `type` (string) - Response format, usually `json`
-  - `desc` (string) - Description of the payment
-  - `identification` (object) - Additional identification info
-    - `cart_id` (integer) - Cart ID associated with the payment
-
-#### **Curl Example:**
-```bash
-curl --location 'http://127.0.0.1:8000/api/aamar_pay_payment_request/' \
---header 'Authorization: Bearer <JWT token>' \
---header 'Content-Type: application/json' \
---header 'Cookie: csrftoken=<csrftoken>; sessionid=<sessionid>' \
---data-raw '{
-    "cus_name": "Mahadi",
-    "cus_email": "me.mahadi10@gmail.com",
-    "cus_phone": "01715059172",
-    "currency": "BDT",
-    "success_url": "http://127.0.0.1:8000/api/aamar_pay_payment_confirmation_request/",
-    "fail_url": "http://127.0.0.1:8000/api/aamar_pay_payment_confirmation_fail_request/",
-    "cancel_url": "http://127.0.0.1:8000/api/aamar_pay_payment_confirmation_fail_request/",
-    "cus_add1": "dhaka",
-    "cus_add2": "dhaka",
-    "cus_city": "dhaka",
-    "cus_state": "dhaka",
-    "cus_postcode": "1216",
-    "cus_country": "bangladesh",
-    "type": "json",
-    "desc": "Description",
-    "identification": {
-        "cart_id": 7
+#### Response Structure for Paginated Response
+```json
+{
+  "next": "<URL to next page>",
+  "previous": "<URL to previous page>",
+  "count": "<Total number of items>",
+  "total_pages": "<Total number of pages>",
+  "current_page": "<Current page number>",
+  "results": [
+    {
+      "primary_key": "<Primary Key>",
+      "id": "<ID>",
+      "name": "<Name>",
+      "tax_id": "<Tax ID>",
+      "file_name": "<File Name>",
+      "...": "(other fields)"
     }
+  ]
+}
+```
+
+#### Examples
+
+**GET Cosmos Items (cURL)**
+
+- **With Filter Options and Pagination**
+
+```sh
+curl --location --request GET 'http://127.0.0.1:8000/api/cosmos/?name=alpha&tax_id=123&page_size=5&page=2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <your_access_token>'
+```
+
+**POST New Cosmos Item (cURL)**
+
+```sh
+curl --location --request POST 'http://127.0.0.1:8000/api/cosmos/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <your_access_token>' \
+--data-raw '{
+    "name": "Sample Cosmos",
+    "tax_id": 123,
+    "accession_id": "ACC001",
+    "relative_abundance": 0.76
 }'
 ```
 
-**Response:**  
-Returns a payment URL to be opened in the browser for continuing the payment process.
+**PATCH Update Cosmos Item (cURL)**
 
-**Stripe requires frontend library so i have did not implemented it**
+```sh
+curl --location --request PATCH 'http://127.0.0.1:8000/api/cosmos/{primary_key}/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <your_access_token>' \
+--data-raw '{
+    "name": "Updated Cosmos Name"
+}'
+```
+
+**DELETE Cosmos Item (cURL)**
+
+```sh
+curl --location --request DELETE 'http://127.0.0.1:8000/api/cosmos/{primary_key}/' \
+--header 'Authorization: Bearer <your_access_token>'
+```
+
+#### Notes
+- All fields in `CosmosModel` are optional except `primary_key`.
+- The `relative_abundance_range` filter must be provided in `min_value,max_value` format (e.g., `0.1,0.5`).
+- Fields such as `class_field`, `unique_matches`, and `total_matches` are renamed to avoid conflicts with Python keywords or improve readability.
+
+---
+
+### Error Codes
+- `400 Bad Request`: Incorrect parameters or validation errors.
+- `404 Not Found`: Resource not found.
+- `500 Internal Server Error`: Server-side error occurred.
 
 
-# For better understanding please contact me, I can help you to understand the project.
+
+### For better understanding please contact me, I can help you to understand the project.
