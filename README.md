@@ -1,5 +1,14 @@
 ## For the webscraper see web_scraper folder's README.MD
 
+Here's a summary of my work:
+- Created a web scraper that downloads samples from cosmodis.com and then placed them in the `downloaded_files` directory under the `webscraper` folder.
+- Implemented a script named `get_all_the_col.py` to extract all unique table headers from the downloaded files (available in the `webscraper` folder).
+- Set up a Django application with a PostgreSQL database, and added a script to read the files from the `downloaded_files` directory and store their content in the database, which can be triggered by `python manage.py load_cosmos_data`.
+- For database optimization, data was first stored in memory and then inserted into PostgreSQL in a single batch.
+- The data can be accessed via the `/api/cosmos/` endpoint (please refer to the root `README.md` file for further details).
+- The Django application has been containerized using Docker for easy deployment.
+
+
 # To run the django in docker 
 ```bash
  bash scripts/live_server_deploy.sh 
