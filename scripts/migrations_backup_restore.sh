@@ -9,7 +9,7 @@ BACKUP_FOLDER="backup_migrations"
 TARGET_DIR="$BACKUP_FOLDER/migration_backup_$DATE_TIME"
 
 # The directories you want to handle
-DIRS=("ecommerce" "notification_management" "users_management" )
+DIRS=("cosmos" "notification_management" "users_management" )
 
 echo "Please choose operation:"
 echo "1. Backup"

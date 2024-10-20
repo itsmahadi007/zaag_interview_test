@@ -12,7 +12,9 @@ class CosmosModelFilter(filters.FilterSet):
     class Meta:
         model = CosmosModel
         fields = [
+            "primary_key",
             "tax_id",
+            "id",
             "name",
             "relative_abundance_range",
             "file_name"
