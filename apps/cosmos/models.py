@@ -29,3 +29,6 @@ class CosmosModel(models.Model):
 
     def __str__(self):
         return f" {self.id} - {self.name} - {self.file_name}"
+
+    class Meta:
+        ordering = ['primary_key']

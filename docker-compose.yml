@@ -4,7 +4,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1516
-      - POSTGRES_DB=ecommerce
+      - POSTGRES_DB=zaag_db
     ports:
       - "5446:5446"
     command: -p 5446

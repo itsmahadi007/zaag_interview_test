@@ -4,6 +4,7 @@ from apps.cosmos.models import CosmosModel
 
 
 class CosmosModelFilter(filters.FilterSet):
+    id = filters.CharFilter(method="filter")
     tax_id = filters.CharFilter(method="filter")
     name = filters.CharFilter(method="filter")
     relative_abundance_range = filters.CharFilter(method="filter")
@@ -24,6 +25,8 @@ class CosmosModelFilter(filters.FilterSet):
     def filter(queryset, name, value):
         if name == "tax_id":
             return queryset.filter(tax_id=value)
+        elif name == "id":
+            return queryset.filter(id=value)
         elif name == "name":
             return queryset.filter(name__icontains=value)
         elif name == "relative_abundance_range":

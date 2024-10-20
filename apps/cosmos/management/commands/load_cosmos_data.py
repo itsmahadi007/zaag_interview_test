@@ -28,14 +28,13 @@ class Command(BaseCommand):
                         'Reads Frequency', 'Unique Matches Frequency', 'Enzyme ID', 'GO Description', 'Total Matches',
                         'Pfam ID', 'Name', 'GTDB ID', 'Domain', 'GO Category'
                     ]
+                    print("Reading Data")
                     for col in expected_columns:
                         if col not in df.columns:
                             df[col] = None
 
                     # Replace NaN values with None
                     df = df.where(pd.notnull(df), None)
-
-                    print("Reading Data")
                     cosmos_objects = []
                     for _, row in df.iterrows():
                         cosmos_objects.append(CosmosModel(
