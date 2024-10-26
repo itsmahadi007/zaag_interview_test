@@ -49,7 +49,7 @@ def scrape_data(driver):
                 thread_driver.quit()
 
         num_threads = min(
-            4, len(list_of_folders)
+            5, len(list_of_folders)
         )
 
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
@@ -95,6 +95,7 @@ def process_folder(driver, folder, root_folder_index):
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
                 )
                 folder = thread_root_folders[thread_root_folder_index]
+                root_folder_name = folder.text
                 print(f"[INFO] Thread processing root folder: {folder.text} - Thread Index: {thread_root_folder_index}")
                 folder.click()
                 time.sleep(3)
@@ -106,8 +107,9 @@ def process_folder(driver, folder, root_folder_index):
                 )
                 print(f"[INFO] Thread processing Sub folder: Found {len(threads_sub_folders)} - Current Sub Index: {index}")
                 sample = threads_sub_folders[index]
+                sub_folder_name = sample.text
                 print(f"[INFO] Thread Processing sample: {sample.text} - Thread Index: {index}")
-                process_sample(thread_sub_driver, sample)
+                process_sample(thread_sub_driver, sample, sub_folder_name, root_folder_name)
 
             except Exception as e:
                 print(f"[INFO] Thread processing folder at index {index}: {str(e)}")
