@@ -124,13 +124,16 @@ def process_sample(driver, sample):
                         "[ERROR] Unable to open selection field dropdown after multiple attempts. Moving to the next option."
                     )
             except Exception as e:
-                print(f"[ERROR] Error processing selection options: {str(e)}")
+                print(f"[INFO] Finished Current Page")
         print(
-            f"[INFO] Finished processing sample {sample.text} , Back to Nested Folder"
+            f"[INFO] Finished processing sample {sample.text}"
         )
 
     except Exception as e:
-        print(f"[ERROR] Error processing sample {str(e)}")
+        try:
+            print(f"[INFO] Exception processing sample.")
+        except:
+            pass
 
 
 

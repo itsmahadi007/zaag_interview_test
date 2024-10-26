@@ -6,76 +6,133 @@ import time
 from handle_dialogs import handle_dialogs
 from navigation_utils import refresh_and_validate
 from process_sample import process_sample
+from driver_setup import setup_driver
+from login import login
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def scrape_data(driver):
     try:
         handle_dialogs(driver)  # Handle dialogs if any appear
         # Locate folder names in the table
-        folders = WebDriverWait(driver, 10).until(
+        root_folders = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located(
                 (By.CSS_SELECTOR, "table tbody tr td a")
             )
         )
-        print(f"[INFO] Found {len(folders)} folders.")
+        print(f"[INFO] Found {len(root_folders)} folders.")
 
-        for index in range(len(folders)):
+        # create a two dimensional list to store the folder names and the number of samples in each folder
+        list_of_folders = [index for index in range(len(root_folders))]
+
+        def process_folder_thread(index):
+            thread_driver = setup_driver()
             try:
-                # Re-locate the folder elements before each interaction
-                folders = WebDriverWait(driver, 10).until(
+                login(thread_driver)
+                handle_dialogs(thread_driver)
+                folders = WebDriverWait(thread_driver, 10).until(
                     EC.presence_of_all_elements_located(
                         (By.CSS_SELECTOR, "table tbody tr td a")
                     )
                 )
                 folder = folders[index]
-                print(f"[INFO] Processing folder: {folder.text}")
-                process_folder(driver, folder)
-
-            except StaleElementReferenceException as e:
-                print(
-                    f"[WARNING] Stale element detected while processing folder: {str(e)}. Retrying folder identification."
-                )
-                refresh_and_validate(driver, "search")
-                continue  # Retry locating folders
+                print(f"[INFO] Thread processing folder: {folder.text}")
+                process_folder(thread_driver, folder, index)
             except Exception as e:
-                print(
-                    f"[ERROR] Unable to process folder: {folder.text if folder else 'Unknown'}. Error: {str(e)}"
-                )
+                try:
+                    print(
+                        f"[INFO] Thread Execption processing root folder at index {index}"
+                    )
+                except:
+                    pass
+                    
+            finally:
+                thread_driver.quit()
+
+        # Define the number of threads to use
+        num_threads = min(
+            3, len(list_of_folders)
+        )  # Use up to 6 threads or the number of folders, whichever is smaller
+
+        # Use ThreadPoolExecutor to manage threads
+        with ThreadPoolExecutor(max_workers=num_threads) as executor:
+            # Submit tasks to the executor
+            future_to_index = {
+                executor.submit(process_folder_thread, index): index
+                for index in range(len(list_of_folders))
+            }
+
+            # Process completed tasks
+            for future in as_completed(future_to_index):
+                index = future_to_index[future]
+                try:
+                    future.result()
+                except Exception as e:
+                    print(
+                        f"[ERROR] Exception in thread for folder index {root_folders[index].text}: {str(e)}"
+                    )
+
+        print("[INFO] All folders processed.")
 
     except Exception as e:
         print("[ERROR] Problem In Root Folder:", str(e))
 
-
-def process_folder(driver, folder):
+def process_folder(driver, folder, root_folder_index):
     try:
-        handle_dialogs(driver)  # Handle dialogs if any appear
+        handle_dialogs(driver)
         folder.click()
-        time.sleep(3)  # Allow time for the page to load
+        time.sleep(3)
 
-        # Ensure we're not stuck on a "data:," page
         if driver.current_url.startswith("data:,"):
             refresh_and_validate(driver)
 
-        # Locate samples
-        samples = driver.find_elements(By.CSS_SELECTOR, "table tbody tr td a")
-        for index in range(len(samples)):
-            # Re-locate the sample element by index to avoid stale element issues
-            samples = driver.find_elements(By.CSS_SELECTOR, "table tbody tr td a")
-            sample = samples[index]
-            print(f"[INFO] Processing sample: {sample.text}")
+        sub_folders = WebDriverWait(driver, 10).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
+        )
+        print(f"[INFO] Found {len(sub_folders)} Sub folders.")
 
-            # Process the sample
-            process_sample(driver, sample)
+        def process_sub_folder_thread(index, thread_root_folder_index):
+            thread_sub_driver = setup_driver()
+            try:
+                login(thread_sub_driver)
+                handle_dialogs(thread_sub_driver)
+                thread_root_folders = WebDriverWait(thread_sub_driver, 10).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
+                )
+                folder = thread_root_folders[thread_root_folder_index]
+                print(f"[INFO] Thread processing root folder: {folder.text} - Thread Index: {thread_root_folder_index}")
+                folder.click()
+                time.sleep(3)
+                if thread_sub_driver.current_url.startswith("data:,"):
+                    refresh_and_validate(thread_sub_driver)
+                
+                threads_sub_folders = WebDriverWait(thread_sub_driver, 10).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
+                )
+                print(f"[INFO] Thread processing Sub folder: Found {len(threads_sub_folders)} - Current Sub Index: {index}")
+                sample = threads_sub_folders[index]
+                print(f"[INFO] Thread Processing sample: {sample.text} - Thread Index: {index}")
+                process_sample(thread_sub_driver, sample)
+
+            except Exception as e:
+                print(f"[INFO] Thread processing folder at index {index}: {str(e)}")
+            finally:
+                thread_sub_driver.quit()
+
+        # Increase the number of threads (adjust as needed)
+        num_sub_threads = min(5, len(sub_folders))
+
+        with ThreadPoolExecutor(max_workers=num_sub_threads) as sub_executor:
+            futures = [sub_executor.submit(process_sub_folder_thread, i, root_folder_index) for i in range(len(sub_folders))]
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    print(f"[ERROR] Exception in thread: {str(e)}")
+
         print(f"[INFO] Finished processing folder: {folder.text}")
+        return True
 
     except Exception as e:
         print(f"[ERROR] Error processing folder '{folder.text}': {str(e)}")
-
-    finally:
-        print(
-            f"[INFO] Finished processing folder: {folder.text}. Navigating back to Root Folder."
-        )
-        driver.get(
-            "https://app.cosmosid.com/search"
-        )  # Use direct navigation instead of driver.back()
-        time.sleep(2)

@@ -1,6 +1,6 @@
 from driver_setup import setup_driver
 from login import login
-from scraper_v2 import scrape_data
+from scraper import scrape_data
 
 if __name__ == "__main__":
     print("[INFO] Starting scraper.")
