@@ -14,8 +14,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def scrape_data(driver):
     try:
-        handle_dialogs(driver)  # Handle dialogs if any appear
-        # Locate folder names in the table
+        handle_dialogs(driver)
         root_folders = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located(
                 (By.CSS_SELECTOR, "table tbody tr td a")
@@ -23,7 +22,6 @@ def scrape_data(driver):
         )
         print(f"[INFO] Found {len(root_folders)} folders.")
 
-        # create a two dimensional list to store the folder names and the number of samples in each folder
         list_of_folders = [index for index in range(len(root_folders))]
 
         def process_folder_thread(index):
@@ -50,20 +48,16 @@ def scrape_data(driver):
             finally:
                 thread_driver.quit()
 
-        # Define the number of threads to use
         num_threads = min(
-            5, len(list_of_folders)
-        )  # Use up to 6 threads or the number of folders, whichever is smaller
+            4, len(list_of_folders)
+        )
 
-        # Use ThreadPoolExecutor to manage threads
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
-            # Submit tasks to the executor
             future_to_index = {
                 executor.submit(process_folder_thread, index): index
                 for index in range(len(list_of_folders))
             }
 
-            # Process completed tasks
             for future in as_completed(future_to_index):
                 index = future_to_index[future]
                 try:
@@ -120,7 +114,6 @@ def process_folder(driver, folder, root_folder_index):
             finally:
                 thread_sub_driver.quit()
 
-        # Increase the number of threads (adjust as needed)
         num_sub_threads = min(5, len(sub_folders))
 
         with ThreadPoolExecutor(max_workers=num_sub_threads) as sub_executor:

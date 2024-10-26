@@ -8,7 +8,7 @@ class CosmosModel(models.Model):
     accession_id = models.CharField(max_length=255, null=True, blank=True)
     go_id = models.CharField(max_length=255, null=True, blank=True)
     class_field = models.CharField(max_length=255, null=True,
-                                   blank=True)  # 'Class' renamed to avoid conflict with Python keyword
+                                   blank=True)
     copies_per_million_cpm = models.FloatField(null=True, blank=True)
     abundance_score = models.FloatField(null=True, blank=True)
     tax_id = models.IntegerField(null=True, blank=True)
