@@ -52,7 +52,7 @@ def scrape_data(driver):
 
         # Define the number of threads to use
         num_threads = min(
-            3, len(list_of_folders)
+            5, len(list_of_folders)
         )  # Use up to 6 threads or the number of folders, whichever is smaller
 
         # Use ThreadPoolExecutor to manage threads
