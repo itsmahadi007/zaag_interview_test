@@ -4,8 +4,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import time
 
-from retry_helper import retry_click, retry_visibility_of_all_elements_located
-
 
 def process_sample(driver, sample):
     from handle_dialogs import handle_dialogs
@@ -93,6 +91,9 @@ def process_sample(driver, sample):
                         print(f"[INFO] Timed out waiting for export button to appear.")
 
                 # Retry mechanism to open the selection field dropdown again
+                if i == len(selection_options):
+                    break
+                
                 retry_attempts = 3
                 selection_field_opened = False
 
@@ -127,13 +128,9 @@ def process_sample(driver, sample):
         print(
             f"[INFO] Finished processing sample {sample.text} , Back to Nested Folder"
         )
-        driver.back()
-        time.sleep(2)
 
     except Exception as e:
         print(f"[ERROR] Error processing sample {str(e)}")
-        driver.back()
-        time.sleep(2)
 
 
 
