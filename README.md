@@ -14,7 +14,7 @@ Here's a summary of my work:
 
 # Web Scraper
 
-Web Scraper is available in `webscraper` folder, it's independent form the django project and docker.
+Web Scraper is available in `webscraper` folder, it's independent from the django project and docker.
 first go to `webscraper` folder,
 
 ### Step 1: Create a Virtual Environment
