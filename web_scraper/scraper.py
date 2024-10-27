@@ -49,7 +49,7 @@ def scrape_data(driver):
                 thread_driver.quit()
 
         num_threads = min(
-            5, len(list_of_folders)
+            3, len(list_of_folders)
         )
 
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
@@ -116,7 +116,7 @@ def process_folder(driver, folder, root_folder_index):
             finally:
                 thread_sub_driver.quit()
 
-        num_sub_threads = min(5, len(sub_folders))
+        num_sub_threads = min(4, len(sub_folders))
 
         with ThreadPoolExecutor(max_workers=num_sub_threads) as sub_executor:
             futures = [sub_executor.submit(process_sub_folder_thread, i, root_folder_index) for i in range(len(sub_folders))]
