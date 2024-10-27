@@ -1,8 +1,28 @@
 from django.db import models
 
 
-class CosmosModel(models.Model):
+
+class RootSample(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    
+class SubSample(models.Model):
+    name = models.CharField(max_length=255)
+    root_sample = models.ForeignKey(RootSample, on_delete=models.CASCADE, related_name='sub_samples')
+
+class Results(models.Model):
+    sub_sample = models.ForeignKey(SubSample, on_delete=models.CASCADE, related_name='results')
+    name = models.CharField(max_length=255)
+    
+class Taxonomy(models.Model):
+    result_of = models.ForeignKey(Results, on_delete=models.CASCADE, limit_choices_to={'name': 'Bacteria'}, related_name='taxonomy')
+    name = models.CharField(max_length=255)
+    
+
+class DataModel(models.Model):
     primary_key = models.AutoField(primary_key=True)
+    result_of = models.ForeignKey(Results, on_delete=models.CASCADE, related_name='data_models', null=True, blank=True)
+    taxonomy = models.ForeignKey(Taxonomy, on_delete=models.CASCADE, related_name='data_models', null=True, blank=True)  
+    
     id = models.CharField(max_length=100, null=True, blank=True)
     name = models.CharField(max_length=255, null=True, blank=True)
     accession_id = models.CharField(max_length=255, null=True, blank=True)

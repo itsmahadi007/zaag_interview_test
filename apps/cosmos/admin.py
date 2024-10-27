@@ -1,7 +1,5 @@
+from django.apps import apps
 from django.contrib import admin
 
-from apps.cosmos.models import CosmosModel
-
-# Register your models here.
-
-admin.site.register(CosmosModel)
+for model in apps.get_app_config('cosmos').models.values():
+    admin.site.register(model)

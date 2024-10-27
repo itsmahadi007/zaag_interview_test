@@ -39,8 +39,8 @@ if DEBUG:
     ]
 
 urlpatterns += [
-    path("api/", include("apps.users_management.urls")),
-    path("api/", include("apps.cosmos.urls")),
+    path('api/users/', include(('apps.users_management.urls', 'users_api'), namespace='users_api')),
+    path('api/cosmos/', include(('apps.cosmos.urls', 'cosmos_api'), namespace='cosmos_api')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
