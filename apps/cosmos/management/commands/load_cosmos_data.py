@@ -8,7 +8,7 @@ import pandas as pd
 
 
 class Command(BaseCommand):
-    help = "Add Sample Data"
+    help = "Load Cosmos Data"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
