@@ -16,11 +16,6 @@ class CustomLoginView(LoginView):
         self.serializer.is_valid(raise_exception=True)
 
         self.login()
-        if not self.user.email_verified:
-            return Response(
-                {"error": "User email is not verified"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
         data = self.get_response()
         user = self.user
         user_serializer = UserSerializerShort(user, context={"request": request})
@@ -34,17 +29,3 @@ class CustomLoginView(LoginView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
-
-
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def refresh_token(request):
-    if request.method == "POST":
-        # token = request.data.get("refresh")
-        # if token:
-        #     # blacklist the token
-        #     refresh_token = RefreshToken(token)
-        #     refresh_token.blacklist()
-        res = {"error": "Token Expired", "message": "Your account is suspended."}
-
-        return Response(res, status.HTTP_401_UNAUTHORIZED)

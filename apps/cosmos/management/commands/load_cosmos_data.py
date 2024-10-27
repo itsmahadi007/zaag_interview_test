@@ -88,23 +88,26 @@ class Command(BaseCommand):
         return root_sample_obj, sub_sample_obj, result_obj, taxonomy_obj
 
     def handle(self, *args, **options):
-        dir_path = "web_scraper/downloaded"
+        dir_path = "web_scraper/downloads"
 
-        for filename in os.listdir(dir_path):
-            if filename.endswith(".tsv"):
-                file_path = os.path.join(dir_path, filename)
-                with open(file_path, "r") as file:
-                    reader = csv.DictReader(file, delimiter="\t")
-                    if not reader.fieldnames:
-                        # Handle empty file
-                        self.create_empty_data_model(filename)
-                    else:
-                        for row in reader:
-                            self.create_data_model_from_row(
-                                row, filename
-                            )
+        for root, dirs, files in os.walk(dir_path):
+            for filename in files:
+                print(f"Processing file: {filename}")
+                if filename.endswith(".tsv"):
+                    file_path = os.path.join(root, filename)
+                    with open(file_path, "r") as file:
+                        reader = csv.DictReader(file, delimiter="\t")
+                        if not reader.fieldnames:
+                            # Handle empty file
+                            self.create_empty_data_model(filename)
+                        else:
+                            for row in reader:
+                                self.create_data_model_from_row(row, filename)
+
         with transaction.atomic():
+            print(f"Adding {len(self.data_models)} rows to data model with a single query")
             DataModel.objects.bulk_create(self.data_models)
+            print("Done!")
 
     def create_empty_data_model(self, filename):
         # Determine whether to use result_of or taxonomy based on filename
@@ -119,6 +122,7 @@ class Command(BaseCommand):
             self.data_models.append(DataModel(result_of=result_obj))
 
     def create_data_model_from_row(self, row, filename):
+        print(f"Adding row to data model: {filename}")
         root_sample_obj, sub_sample_obj, result_obj, taxonomy_obj = (
             self.get_instance_from_filename(filename)
         )
@@ -145,7 +149,7 @@ class Command(BaseCommand):
                     if pd.notna(row["Abundance Score"])
                     else None
                 ),
-                tax_id=int(row["Tax ID"]) if pd.notna(row["Tax ID"]) else None,
+                tax_id=str(row["Tax ID"]) if pd.notna(row["Tax ID"]) else None,
                 caz_id=row.get("CAZy ID", None),
                 normalized_reads_frequency=(
                     float(row["Normalized Reads Frequency"])
