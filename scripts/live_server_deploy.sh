@@ -23,8 +23,8 @@ docker compose build
 docker compose run django python manage.py makemigrations
 docker compose run django python manage.py migrate
 docker compose run django python manage.py collectstatic --noinput
-docker compose run django python manage.py load_cosmos_data
 docker compose run django python manage.py sample
+docker compose run django python manage.py load_cosmos_data
 docker compose up -d
 
 echo "Services for docker-compose.yml have been started successfully."

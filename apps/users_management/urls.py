@@ -22,7 +22,6 @@ urlpatterns = [
     path("login/", CustomLoginView.as_view(), name='login'),
     path("register/", CustomRegisterView.as_view()),
     path("token-refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("logout/", LogoutView.as_view(), name="logout"),
 
     # user basic apis
     path("user_update/<int:user_id>/", user_update),

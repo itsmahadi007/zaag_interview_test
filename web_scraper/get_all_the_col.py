@@ -20,5 +20,3 @@ for filename in os.listdir(dir_path):
 print("Unique headers found across all files:")
 print(unique_headers)
 print(f"Length of unique headers: {len(unique_headers)}")
-# for header in unique_headers:
-#     print(header)
