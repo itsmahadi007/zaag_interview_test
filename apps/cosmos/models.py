@@ -9,13 +9,22 @@ class SubSample(models.Model):
     name = models.CharField(max_length=255)
     root_sample = models.ForeignKey(RootSample, on_delete=models.CASCADE, related_name='sub_samples')
 
+    class Meta:
+        unique_together = (('name', 'root_sample'),)
+
 class Results(models.Model):
     sub_sample = models.ForeignKey(SubSample, on_delete=models.CASCADE, related_name='results')
     name = models.CharField(max_length=255)
+
+    class Meta:
+        unique_together = (('sub_sample', 'name'),)
     
 class Taxonomy(models.Model):
     result_of = models.ForeignKey(Results, on_delete=models.CASCADE, limit_choices_to={'name': 'Bacteria'}, related_name='taxonomy')
     name = models.CharField(max_length=255)
+
+    class Meta:
+        unique_together = (('result_of', 'name'),)
     
 
 class DataModel(models.Model):
