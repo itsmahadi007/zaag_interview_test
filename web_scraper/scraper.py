@@ -96,7 +96,7 @@ def process_folder(driver, folder, root_folder_index):
         if driver.current_url.startswith("data:,"):
             refresh_and_validate(driver)
 
-        sub_folders = WebDriverWait(driver, 600).until(
+        sub_folders = WebDriverWait(driver, 60).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
         )
         logger.info(f"[INFO] Found {len(sub_folders)} Sub folders.")
@@ -106,7 +106,7 @@ def process_folder(driver, folder, root_folder_index):
             try:
                 login(thread_sub_driver)
                 handle_dialogs(thread_sub_driver)
-                thread_root_folders = WebDriverWait(thread_sub_driver, 600).until(
+                thread_root_folders = WebDriverWait(thread_sub_driver, 60).until(
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
                 )
                 folder = thread_root_folders[thread_root_folder_index]
@@ -118,7 +118,7 @@ def process_folder(driver, folder, root_folder_index):
                 if thread_sub_driver.current_url.startswith("data:,"):
                     refresh_and_validate(thread_sub_driver)
                 
-                threads_sub_folders = WebDriverWait(thread_sub_driver, 600).until(
+                threads_sub_folders = WebDriverWait(thread_sub_driver, 60).until(
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, "table tbody tr td a"))
                 )
                 logger.info(f"[INFO] Thread processing Sub folder: Found {len(threads_sub_folders)} - Current Sub Index: {index}")
