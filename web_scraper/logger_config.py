@@ -1,6 +1,11 @@
 # logger_config.py
 import logging
 from datetime import datetime
+import os
+
+# Create logs directory if it doesn't exist
+if not os.path.exists('logs'):
+    os.makedirs('logs')
 
 # Generate a timestamp string
 timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
