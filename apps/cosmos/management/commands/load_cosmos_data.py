@@ -92,17 +92,21 @@ class Command(BaseCommand):
 
         for root, dirs, files in os.walk(dir_path):
             for filename in files:
-                print(f"Processing file: {filename}")
-                if filename.endswith(".tsv"):
-                    file_path = os.path.join(root, filename)
-                    with open(file_path, "r") as file:
-                        reader = csv.DictReader(file, delimiter="\t")
-                        if not reader.fieldnames:
-                            # Handle empty file
-                            self.create_empty_data_model(filename)
-                        else:
-                            for row in reader:
-                                self.create_data_model_from_row(row, filename)
+                try:
+                    print(f"Processing file: {filename}")
+                    if filename.endswith(".tsv"):
+                        file_path = os.path.join(root, filename)
+                        with open(file_path, "r") as file:
+                            reader = csv.DictReader(file, delimiter="\t")
+                            if not reader.fieldnames:
+                                # Handle empty file
+                                self.create_empty_data_model(filename)
+                            else:
+                                for row in reader:
+                                    self.create_data_model_from_row(row, filename)
+                except Exception as e:
+                    print(f"Error processing file {filename}: {str(e)}")
+                    continue
 
         with transaction.atomic():
             print(f"Adding {len(self.data_models)} rows to data model with a single query")
